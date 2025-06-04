@@ -1011,6 +1011,24 @@
       height: 100px;
     }
 
+    .flashing-new {
+      animation: flash 1.5s infinite;
+      color: #ff6b6b;
+      font-weight: bold;
+    }
+
+    @keyframes flash {
+
+      0%,
+      50% {
+        opacity: 1;
+      }
+
+      51%,
+      100% {
+        opacity: 0;
+      }
+    }
 
     .task-grid {
       display: grid;
@@ -1538,7 +1556,16 @@
                     <span>Dataset</span>
                   </a>
                 </span>
-
+                <!-- New Paper. -->
+                <span class="link-block">
+                  <a href="https://vlmsarebiased.github.io/" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <p style="font-size:20px">✨</p>
+                    </span>
+                    <span><span class="flashing-new">New work:</span> VLMs Are Biased</span>
+                  </a>
+                </span>
               </div>
             </div>
           </div>
@@ -1995,9 +2022,7 @@
                 <td style="text-align: center; vertical-align: middle;"><span class="label">1</span><span
                     class="cross">✗</span>
                 </td>
-                <td style="text-align: center; vertical-align: middle;"><span class="label">1</span><span
-                    class="cross">✗</span>
-                </td>
+
               </tr>
               <tr>
                 <td style="text-align: center; vertical-align: middle;"><img src="static/images/claude-35.png"
