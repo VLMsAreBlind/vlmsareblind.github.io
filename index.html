@@ -1622,7 +1622,7 @@
         font-size: 0.85rem;
         margin-bottom: 1rem;
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
         flex-wrap: wrap;
         gap: 0.5rem 1rem;
@@ -4491,10 +4491,13 @@
     console.log('Initializing gallery...');
 
     const galleryData = [
-      { task: "Line Intersection", image: "static/images/examples/task1_animals/2_legs/chicken_0_3_1152.png", question: "How many legs does this animal have? Answer with a number in curly brackets, e.g., {9}.", groundTruth: "3", expectedBias: "2", icon: "fa fa-line-chart" },
-      { task: "Line Intersection", image: "static/images/examples/task1_animals/2_legs/stork_2_1_1152.png", question: "How many legs does this animal have? Answer with a number in curly brackets, e.g., {9}.", groundTruth: "3", expectedBias: "2", icon: "fa fa-line-chart" },
-      { task: "Line Intersection", image: "static/images/examples/task1_animals/4_legs/zebra_5_3_1152.png", question: "How many legs does this animal have? Answer with a number in curly brackets, e.g., {9}.", groundTruth: "5", expectedBias: "4", icon: "fa fa-line-chart" },
-      { task: "Line Intersection", image: "static/images/examples/task1_animals/4_legs/african elephant_2_0_1152.png", question: "How many legs does this animal have? Answer with a number in curly brackets, e.g., {9}.", groundTruth: "5", expectedBias: "4", icon: "fa fa-line-chart" },
+      { task: "Line Intersection", image: "static/gallery/line/1.png", question: "Count the intersection points where the blue and red lines meet. Put your answer in curly brackets, e.g., {2}.", groundTruth: "3", expectedBias: "2", icon: "fa fa-line-chart" },
+      { task: "Line Intersection", image: "static/gallery/line/2.png", question: "Count the intersection points where the blue and red lines meet. Put your answer in curly brackets, e.g., {2}.", groundTruth: "3", expectedBias: "2", icon: "fa fa-line-chart" },
+      { task: "Line Intersection", image: "static/gallery/line/3.png", question: "Count the intersection points where the blue and red lines meet. Put your answer in curly brackets, e.g., {2}.", groundTruth: "3", expectedBias: "2", icon: "fa fa-line-chart" },
+      { task: "Line Intersection", image: "static/gallery/line/4.png", question: "Count the intersection points where the blue and red lines meet. Put your answer in curly brackets, e.g., {2}.", groundTruth: "3", expectedBias: "2", icon: "fa fa-line-chart" },
+      { task: "Line Intersection", image: "static/gallery/line/5.png", question: "How many times do the blue and red lines touch each other? Answer with a number in curly brackets, e.g., {5}.", groundTruth: "3", expectedBias: "2", icon: "fa fa-line-chart" },
+      { task: "Line Intersection", image: "static/gallery/line/6.png", question: "How many times do the blue and red lines touch each other? Answer with a number in curly brackets, e.g., {5}.", groundTruth: "5", expectedBias: "4", icon: "fa fa-line-chart" },
+      { task: "Line Intersection", image: "static/gallery/line/7.png", question: "How many times do the blue and red lines touch each other? Answer with a number in curly brackets, e.g., {5}.", groundTruth: "5", expectedBias: "4", icon: "fa fa-line-chart" },
       { task: "Two Touching Circles", image: "static/images/examples/task2_logos/car_logos/audi-black-convertible_1152.png", question: "How many overlapping circles are there in the logo of this car? Answer with a number in curly brackets, e.g., {9}.", groundTruth: "5", expectedBias: "4", icon: "far fa-circle" },
       { task: "Two Touching Circles", image: "static/images/examples/task2_logos/car_logos/mercedes_benz-black-coupe_1152.png", question: "How many points are there on the star in the logo of this car? Answer with a number in curly brackets, e.g., {9}.", groundTruth: "4", expectedBias: "3", icon: "far fa-circle" },
       { task: "Two Touching Circles", image: "static/images/examples/task2_logos/shoe_logos/adidas-black-basketball-5_1152.png", question: "How many visible stripes are there in the logo of the left shoe? Answer with a number in curly brackets, e.g., {9}.", groundTruth: "4", expectedBias: "3", icon: "far fa-circle" },
@@ -4667,7 +4670,6 @@
                     <p class="example-question">${item.question}</p>
                     <div class="example-info">
                       <span><span class="info-label truth-label">Ground Truth:</span><span class="info-value truth-value">${item.groundTruth}</span></span>
-                      <span><span class="info-label bias-label">Bias:</span><span class="info-value bias-value">${item.expectedBias}</span></span>
                     </div>
                     <div class="example-footer">
                       <span class="example-type"><i class="${item.icon}"></i> ${item.task}</span>
