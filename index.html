@@ -34,6 +34,16 @@
     gtag('config', 'G-GRFWN15ZEN');
   </script>
 
+  <script>
+    function trackExamplesVisit() {
+      gtag('event', 'click', {
+        'event_category': 'Examples',
+        'event_label': 'GitHub Examples',
+        'value': 1
+      });
+    }
+  </script>
+
   <link rel="stylesheet" href="https://gradio.s3-us-west-2.amazonaws.com/2.6.2/static/bundle.css">
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
   <link rel="stylesheet" href="./static/css/bulma.min.css">
@@ -1556,6 +1566,17 @@
                     <span>Dataset</span>
                   </a>
                 </span>
+                
+                <span class="link-block">
+                <a href="#example-gallery-section" class="external-link button is-normal is-rounded is-dark" onclick="trackExamplesVisit()">
+                <span class="icon">
+                    <i class="fas fa-play-circle"></i>
+                </span>
+                <span>Test It Yourself</span>
+                </a>
+                </span>
+
+                <span
                 <!-- New Paper. -->
                 <span class="link-block">
                   <a href="https://vlmsarebiased.github.io/" target="_blank"
