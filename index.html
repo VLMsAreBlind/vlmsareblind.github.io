@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="utf-8">
   <meta name="description" content="Vision language models are blind">
@@ -49,19 +48,21 @@
   <link rel="stylesheet" href="./static/css/bulma.min.css">
   <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
   <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
-  <script src="https://kit.fontawesome.com/ab929d0fa6.js" crossorigin="anonymous"></script>
+  <!-- <script src="https://kit.fontawesome.com/ab929d0fa6.js" crossorigin="anonymous"></script> -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
   <link rel="icon" href="./static/images/favicon.ico">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <!-- <script defer src="./static/js/fontawesome.all.min.js"></script> -->
   <script src="./static/js/bulma-carousel.min.js"></script>
   <script src="./static/js/bulma-slider.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 
   <script type="module" src="https://gradio.s3-us-west-2.amazonaws.com/4.7.1/gradio.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 
   <style>
     ol li {
@@ -226,7 +227,6 @@
       /* Rounded corners at the top */
       border-top-right-radius: 10px;
     }
-
 
     /* Basic table styling */
     .responsive-table {
@@ -1455,6 +1455,321 @@
       vertical-align: middle;
     }
 
+    #example-gallery-section {
+      scroll-margin-top: 20px;
+    }
+    .gallery-section {
+        background: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        overflow: hidden;
+        border: 1px solid #e2e8f0;
+        margin: 2rem 0;
+    }
+    .gallery-header {
+        background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+        color: #ffffff;
+        padding: 1.5rem;
+        text-align: center;
+    }
+    .gallery-header h2 {
+        color: #ffffff;
+        margin: 0;
+        font-size: 1.8rem;
+    }
+    .gallery-filters {
+        padding: 1rem 1.5rem;
+        background: #f8fafc;
+        border-top: 1px solid #e2e8f0;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    .gallery-filter-btn {
+        padding: 0.5rem 1rem;
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: #4a5568;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .gallery-filter-btn:hover {
+      background: #f1f5f9;
+      border-color: #cbd5e0;
+      transform: translateY(-1px);
+    }
+    .gallery-filter-btn.active {
+      background: #1a237e;
+      color: #ffffff;
+      border-color: #1a237e;
+    }
+
+    .gallery-container {
+        position: relative;
+        padding: 1.5rem 50px;
+        background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    .gallery-viewport {
+        overflow: hidden;
+        position: relative;
+        opacity: 1;
+        transition: opacity 0.3s ease-in-out;
+        max-width: 100%;
+    }
+
+    .gallery-track {
+        display: flex;
+        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); /* Smoother transition */
+        max-width: 100%;
+    }
+
+    .gallery-slide {
+        flex: 0 0 100%;
+        display: flex;
+        gap: 1.5rem;
+        box-sizing: border-box;
+        max-width: 100%;
+    }
+
+    .gallery-item {
+        flex: 0 0 auto; /* Let JS set the width, don't shrink or grow */
+        box-sizing: border-box;
+        max-width: 100%;
+    }
+
+    .example-card {
+        background: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: 1px solid #e2e8f0;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+    .example-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+    }
+    .example-image {
+        width: 100%;
+        height: 200px;
+        position: relative;
+        overflow: hidden;
+        background: #f1f5f9;
+        border-bottom: 1px solid #e2e8f0;
+    }
+    .example-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+        max-width: 100%;
+    }
+    .image-fallback {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #f1f5f9;
+        color: #94a3b8;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        font-size: 0.9rem;
+        text-align: center;
+        padding: 1rem;
+        box-sizing: border-box;
+    }
+    .example-image.has-error .image-fallback {
+        display: flex;
+    }
+    .example-image.has-error img {
+        display: none;
+    }
+    .example-content {
+      padding: 1rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .example-question {
+        font-size: 0.9rem;
+        color: #333;
+        line-height: 1.4;
+        margin-bottom: 0.8rem;
+        flex-grow: 1;
+    }
+    .example-info {
+        font-size: 0.85rem;
+        margin-bottom: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 0.5rem 1rem;
+        border: 1px solid #e2e8f0;
+        background: #f8fafc;
+        padding: 0.6rem;
+        border-radius: 6px;
+    }
+    .info-label {
+        font-weight: 600;
+        margin-right: 0.4em;
+    }
+    .truth-label { color: #166534; }
+    .bias-label { color: #991b1b; }
+    .info-value {
+        font-family: 'Courier New', Courier, monospace;
+    }
+    .truth-value { color: #15803d; }
+    .bias-value { color: #b91c1c; }
+
+    .example-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: auto;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    .example-type {
+        display: inline-block;
+        background: #4a5568;
+        color: #ffffff;
+        padding: 0.2rem 0.6rem;
+        border-radius: 10px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        white-space: nowrap;
+    }
+    .copy-prompt-btn, .copy-image-btn {
+        background: #e2e8f0;
+        border: 1px solid #cbd5e0;
+        color: #4a5568;
+        padding: 0.3rem 0.7rem;
+        font-size: 0.75rem;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+    }
+    .copy-image-btn {
+      background: #dbeafe;
+      border-color: #93c5fd;
+      color: #1e40af;
+    }
+    .copy-prompt-btn:hover {
+        background: #cbd5e0;
+    }
+    .copy-prompt-btn.copied {
+        background: #d1fae5;
+        color: #065f46;
+        border-color: #6ee7b7;
+    }
+
+    .copy-image-btn:hover {
+        background: #bfdbfe;
+        border-color: #60a5fa;
+    }
+
+    .copy-image-btn.copied {
+        background: #d1fae5;
+        color: #065f46;
+        border-color: #6ee7b7;
+    }
+
+    .copy-buttons {
+        display: flex;
+        gap: 0.5rem;
+    }
+    .gallery-nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(255,255,255,0.9);
+        border: 1px solid rgba(0,0,0,0.1);
+        color: #333;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        z-index: 10;
+        backdrop-filter: blur(5px);
+    }
+    .gallery-nav:hover {
+        background: white;
+        transform: translateY(-50%) scale(1.1);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+    .gallery-nav.prev { left: 5px; } 
+    .gallery-nav.next { right: 5px; } 
+
+    .gallery-indicators {
+        display: flex;
+        justify-content: center;
+        gap: 0.75rem;
+        padding: 1.5rem;
+        background: #f8fafc;
+        border-top: 1px solid #e2e8f0;
+    }
+    .gallery-indicator {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #cbd5e0;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    .gallery-indicator:hover { background: #a0aec0; }
+    .gallery-indicator.active {
+        background: #1a237e;
+        transform: scale(1.2);
+    }
+    .gallery-paused {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: rgba(0,0,0,0.7);
+        color: #ffffff;
+        padding: 0.3rem 0.8rem;
+        border-radius: 12px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        z-index: 10;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    .gallery-container:hover .gallery-paused {
+        opacity: 1;
+        visibility: visible;
+    }
+
     @media screen and (max-width: 768px) {
       .performance-table {
         font-size: 0.8rem;
@@ -1474,7 +1789,176 @@
         width: 16px;
         height: 16px;
       }
+      .buttons {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      /* Content sections */
+      .content-section {
+        margin-bottom: 2rem;
+        padding: 1rem;
+      }
+
+      .content-section .column ul {
+        list-style: disc; 
+        margin-left: 1.5em; 
+        padding-left: 0.5em; 
+      }
+
+      .content-section .column ul li {
+        margin-bottom: 0.5em; 
+      }
+
+
+      #example-gallery-section {
+        margin-left: -0.8rem !important;
+        margin-right: -0.8rem !important;
+        width: calc(100% + 1.6rem) !important;
+        max-width: calc(100% + 1.6rem) !important;
+        overflow-x: hidden;
+      }
+
+      #example-gallery-section .container {
+        max-width: 100% !important;
+        padding: 0 !important;
+        overflow-x: hidden;
+      }
+
+      /* Additional gallery responsive fixes */
+      .gallery-section * {
+        max-width: 100% !important;
+        box-sizing: border-box;
+      }
+
+      /* GALLERY SECTION - FIXED WIDTH CALCULATION */
+      .gallery-section {
+        margin: 0 !important;
+        border-radius: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        position: relative;
+        left: 0;
+        right: 0;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        overflow-x: hidden;
+      }
+
+      .gallery-container {
+        padding: 1rem !important;
+        margin: 0 !important;
+        overflow-x: hidden;
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .gallery-viewport {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+      }
+
+      /* Make gallery track stack vertically on mobile */
+      .gallery-track {
+        flex-direction: column !important;
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .gallery-slide {
+        flex-direction: column !important;
+        gap: 0.5rem !important;
+        padding: 0 !important;
+        width: 100%;
+        max-width: 100%;
+      }
+
+      /* Gallery cards responsive */
+      .example-card {
+        font-size: 0.8rem;
+        margin: 0 0 0.5rem 0 !important;
+        border-radius: 4px;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box;
+        overflow: hidden;
+      }
+
+      .gallery-item {
+        width: 100% !important;
+        max-width: 100% !important;
+        flex: none !important;
+        margin: 0 !important;
+        box-sizing: border-box;
+      }
+
+      /* Gallery images responsive on mobile */
+      .example-image {
+        height: auto !important;
+        min-height: 120px;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      .example-image img {
+        width: 100% !important;
+        height: auto !important;
+        max-height: 150px;
+        object-fit: contain;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      .example-content {
+        padding: 0.6rem;
+      }
+
+      .example-question {
+        font-size: 0.75rem;
+        line-height: 1.2;
+        margin-bottom: 0.4rem;
+      }
+
+      .example-info {
+        font-size: 0.7rem;
+        padding: 0.3rem;
+        margin-bottom: 0.6rem;
+      }
+
+      .example-footer {
+        flex-direction: column;
+        gap: 0.3rem;
+        padding: 0 0.6rem 0.6rem 0.6rem;
+      }
+
+      .copy-prompt-btn, .copy-image-btn {
+        padding: 0.2rem 0.4rem;
+        font-size: 0.65rem;
+        width: 100%;
+        justify-content: center;
+      }
+
+      .copy-buttons {
+        flex-direction: column;
+        width: 100%;
+        gap: 0.3rem;
+      }
+
+      .example-type {
+        text-align: center;
+      }
+
+      /* Hide gallery navigation on mobile */
+      .gallery-nav {
+        display: none;
+      }
+
     }
+
   </style>
 </head>
 
@@ -3923,9 +4407,57 @@
           </figcaption>
 
         </div>
-      </div>
+      </div>    
   </section>
   <!-- TASK 7 Ends -->
+
+  <hr>
+   <section class="section">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <div class="content-section" id="example-gallery-section">
+            <div class="gallery-section">
+              <div class="gallery-header">
+                <h2><i class="fas fa-vial" style="margin-right: 0.8rem;"></i>Example Gallery</h2>
+                <p style="font-size: 1rem; opacity: 0.9; margin-top: 0.5rem;">Please feel free to copy the prompts and test with your own VLMs.</p>
+              </div>
+              
+              <div class="gallery-container" id="gallery-container">
+                <div class="gallery-paused" id="gallery-paused">
+                  <i class="fas fa-pause"></i> Paused
+                </div>
+                <div class="gallery-nav prev" id="gallery-prev">
+                  <i class="fas fa-chevron-left"></i>
+                </div>
+                <div class="gallery-nav next" id="gallery-next">
+                  <i class="fas fa-chevron-right"></i>
+                </div>
+                <div class="gallery-viewport" id="gallery-viewport">
+                  <!-- Gallery items will be populated by JavaScript -->
+                  <div class="gallery-loading" style="display: flex; justify-content: center; align-items: center; height: 400px; color: #666;">
+                    <i class="fas fa-spinner fa-spin" style="margin-right: 0.5rem;"></i>
+                    Loading gallery...
+                  </div>
+                </div>
+              </div>
+              
+              <div class="gallery-filters" id="gallery-filters">
+                <!-- Filter buttons will be populated by JavaScript -->
+                <div class="filters-loading" style="text-align: center; padding: 1rem; color: #666;">
+                  Loading filters...
+                </div>
+              </div>
+              
+              <div class="gallery-indicators" id="gallery-indicators">
+                <!-- Indicators will be populated by JavaScript -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+   </section>
 
 
 
@@ -3948,12 +4480,323 @@
   </footer>
   <!-- Add this script at the end of the body -->
 
+  <script>  
+  document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM loaded, initializing components...');
+    initializeGallery();
+    setupSmoothScrolling();
+  });
+
+  function initializeGallery() {
+    console.log('Initializing gallery...');
+
+    const galleryData = [
+      { task: "Line Intersection", image: "static/images/examples/task1_animals/2_legs/chicken_0_3_1152.png", question: "How many legs does this animal have? Answer with a number in curly brackets, e.g., {9}.", groundTruth: "3", expectedBias: "2", icon: "fa fa-line-chart" },
+      { task: "Line Intersection", image: "static/images/examples/task1_animals/2_legs/stork_2_1_1152.png", question: "How many legs does this animal have? Answer with a number in curly brackets, e.g., {9}.", groundTruth: "3", expectedBias: "2", icon: "fa fa-line-chart" },
+      { task: "Line Intersection", image: "static/images/examples/task1_animals/4_legs/zebra_5_3_1152.png", question: "How many legs does this animal have? Answer with a number in curly brackets, e.g., {9}.", groundTruth: "5", expectedBias: "4", icon: "fa fa-line-chart" },
+      { task: "Line Intersection", image: "static/images/examples/task1_animals/4_legs/african elephant_2_0_1152.png", question: "How many legs does this animal have? Answer with a number in curly brackets, e.g., {9}.", groundTruth: "5", expectedBias: "4", icon: "fa fa-line-chart" },
+      { task: "Two Touching Circles", image: "static/images/examples/task2_logos/car_logos/audi-black-convertible_1152.png", question: "How many overlapping circles are there in the logo of this car? Answer with a number in curly brackets, e.g., {9}.", groundTruth: "5", expectedBias: "4", icon: "far fa-circle" },
+      { task: "Two Touching Circles", image: "static/images/examples/task2_logos/car_logos/mercedes_benz-black-coupe_1152.png", question: "How many points are there on the star in the logo of this car? Answer with a number in curly brackets, e.g., {9}.", groundTruth: "4", expectedBias: "3", icon: "far fa-circle" },
+      { task: "Two Touching Circles", image: "static/images/examples/task2_logos/shoe_logos/adidas-black-basketball-5_1152.png", question: "How many visible stripes are there in the logo of the left shoe? Answer with a number in curly brackets, e.g., {9}.", groundTruth: "4", expectedBias: "3", icon: "far fa-circle" },
+      { task: "Two Touching Circles", image: "static/images/examples/task2_logos/shoe_logos/adidas-red-running-5_1152.png", question: " How many visible stripes are there in the logo of the left shoe? Answer with a number in curly brackets, e.g., {9}.", groundTruth: "4", expectedBias: "3", icon: "far fa-circle" },
+      { task: "The Circled Letter", image: "static/images/examples/task3_flags/stripes/Flag of the United States-stripes=12_1152.png", question: "How many stripes are there on this flag? Answer with a number in curly brackets, e.g., {9}.", groundTruth: "12", expectedBias: "13", icon: "fa fa-registered" },
+      { task: "The Circled Letter", image: "static/images/examples/task3_flags/stripes/Flag of the United States-stripes=14_1152.png", question: "How many stripes are there on this flag? Answer with a number in curly brackets, e.g., {9}.", groundTruth: "14", expectedBias: "13", icon: "fa fa-registered" },
+      { task: "The Circled Letter", image: "static/images/examples/task3_flags/stars/Flag of Europe-stars=11_1152.png", question: "How many stars are there on this flag? Answer with a number in curly brackets, e.g., {9}.", groundTruth: "11", expectedBias: "12", icon: "fa fa-registered" },
+      { task: "The Circled Letter", image: "static/images/examples/task3_flags/stars/Flag of Europe-stars=13_1152.png", question: "How many stars are there on this flag? Answer with a number in curly brackets, e.g., {9}.", groundTruth: "13", expectedBias: "12", icon: "fa fa-registered" },
+      { task: "Counting Overlapping Shapes", image: "static/images/examples/task4_chess_pieces/chess/chess_pieces_005_remove_whiteking_at_e1_notitle_px1152.png", question: "How many chess pieces are there on this board? Answer with a number in curly brackets, e.g., {9}.", groundTruth: "31", expectedBias: "32", icon: "fas fa-circle" },
+      { task: "Counting Overlapping Shapes", image: "static/images/examples/task4_chess_pieces/chess/chess_pieces_008_remove_blackbishop_at_f8_notitle_px1152.png", question: "How many chess pieces are there on this board? Answer with a number in curly brackets, e.g., {9}.", groundTruth: "31", expectedBias: "32", icon: "fas fa-circle" },
+      { task: "Counting Overlapping Shapes", image: "static/images/examples/task4_chess_pieces/xiangqi/xiangqi_pieces_002_remove_black_soldier_at_e4_notitle_px1152.png", question: "How many xiangqi pieces are there on this board? Answer with a number in curly brackets, e.g., {9}.", groundTruth: "31", expectedBias: "32", icon: "fas fa-circle" },
+      { task: "Counting Overlapping Shapes", image: "static/images/examples/task4_chess_pieces/xiangqi/xiangqi_pieces_006_remove_red_chariot_at_i10_notitle_px1152.png", question: "How many xiangqi pieces are there on this board? Answer with a number in curly brackets, e.g., {9}.", groundTruth: "31", expectedBias: "32", icon: "fas fa-circle" },
+      { task: "Counting Overlapping Shapes", image: "static/images/examples/task5_game_boards/chess/chess_grid_02_row_remove_last_row_notitle_px1152.png", question: "How many rows are there on this board? Answer with a number in curly brackets, e.g., {9}.", groundTruth: "7", expectedBias: "8", icon: "fas fa-circle" },
+      { task: "Nested Squares", image: "static/images/examples/task5_game_boards/go/go_grid_03_add_row_px1152.png", question: "How many horizontal lines are there on this board? Answer with a number in curly brackets, e.g., {9}.", groundTruth: "20", expectedBias: "19", icon: "fa fa-clone" },
+      { task: "Nested Squares", image: "static/images/examples/task5_game_boards/sudoku/sudoku_grid_08_col_remove_last_col_notitle_px1152.png", question: "How many columns are there on this puzzle? Answer with a number in curly brackets, e.g., {9}.", groundTruth: "8", expectedBias: "9", icon: "fa fa-clone" },
+      { task: "Nested Squares", image: "static/images/examples/task5_game_boards/xiangqi/xiangqi_grid_02_row_remove_row_after_river_notitle_px1152.png", question: "How many horizontal lines are there on this board? Answer with a number in curly brackets, e.g., {9}.", groundTruth: "9", expectedBias: "10", icon: "fa fa-clone" },
+      { task: "Counting Grid Rows and Columns", image: "static/images/examples/task6_optical_illusion/ebbinghaus/Ebbinghaus_017_str3_diff0p7_notitle_px1152.png", question: "Are the two inner circles equal in size? Answer in curly brackets, e.g., {Yes} or {No}.", groundTruth: "No", expectedBias: "Yes", icon: "fa fa-table" },
+      { task: "Counting Grid Rows and Columns", image: "static/images/examples/task6_optical_illusion/muller_lyer/MullerLyer_023_str50_diff0p5_notitle_px1152.png", question: "Are the two horizontal lines equal in length? Answer in curly brackets, e.g., {Yes} or {No}.", groundTruth: "No", expectedBias: "Yes", icon: "fa fa-table" },
+      { task: "Counting Grid Rows and Columns", image: "static/images/examples/task6_optical_illusion/zollner/Zollner_022_strneg75_diffneg2p5_notitle_px1152.png", question: "Are the two horizontal lines parallel? Answer in curly brackets, e.g., {Yes} or {No}.", groundTruth: "No", expectedBias: "Yes", icon: "fa fa-table" },
+      { task: "Counting Grid Rows and Columns", image: "static/images/examples/task6_optical_illusion/ponzo/Ponzo_023_str18_diff0p25_notitle_px1152.png", question: "Are the two horizontal lines equal in length? Answer in curly brackets, e.g., {Yes} or {No}.", groundTruth: "No", expectedBias: "Yes", icon: "fa fa-table" },
+      { task: "Subway Maps", image: "static/images/examples/task7_patterned_grid/dice/dice_001_remove_C3_notitle_px1152.png", question: "How many circles are there in cell C3? Answer with a number in curly brackets, e.g., {9}.", groundTruth: "2", expectedBias: "3", icon: "fa fa-map-signs" },
+      { task: "Subway Maps", image: "static/images/examples/task7_patterned_grid/dice/dice_001_replace_C3_notitle_px1152.png", question: "How many circles are there in cell C3? Answer with a number in curly brackets, e.g., {9}.", groundTruth: "2", expectedBias: "3", icon: "fa fa-map-signs" },
+      { task: "Subway Maps", image: "static/images/examples/task7_patterned_grid/tally/tally_003_add_D4_notitle_px1152.png", question: "How many lines are there in cell D4? Answer with a number in curly brackets, e.g., {9}.", groundTruth: "5", expectedBias: "4", icon: "fa fa-map-signs" },
+      { task: "Subway Maps", image: "static/images/examples/task7_patterned_grid/tally/tally_003_remove_D4_notitle_px1152.png", question: "How many lines are there in cell D4? Answer with a number in curly brackets, e.g., {9}.", groundTruth: "3", expectedBias: "4", icon: "fa fa-map-signs" }
+    ];
+
+    const galleryContainer = document.getElementById('gallery-container');
+    const filtersContainer = document.getElementById('gallery-filters');
+    const viewport = document.getElementById('gallery-viewport');
+    const indicatorsContainer = document.getElementById('gallery-indicators');
+    const prevBtn = document.getElementById('gallery-prev');
+    const nextBtn = document.getElementById('gallery-next');
+
+    if (!galleryContainer || !filtersContainer || !viewport || !indicatorsContainer) {
+      console.error('Gallery elements not found');
+      return;
+    }
+
+    const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0);
+
+    let categories = [];
+    let currentCategoryIndex = 0;
+    let autoSlideInterval;
+    let isPaused = false;
+
+    function setup() {
+      categories = [...new Set(galleryData.map(item => item.task))];
+      createFilterButtons();
+      createIndicators();
+      
+      prevBtn.addEventListener('click', () => changeCategory(-1));
+      nextBtn.addEventListener('click', () => changeCategory(1));
+      
+      // *** FIX #1: Conditional event listeners for pause/play ***
+      if (isTouchDevice) {
+          // On mobile, use tap to toggle pause/play
+          galleryContainer.addEventListener('click', (e) => {
+              // Make sure the click is not on a button
+              if (!e.target.closest('button')) {
+                  if (isPaused) {
+                      isPaused = false;
+                      startAutoPlay();
+                  } else {
+                      pauseAutoPlay();
+                  }
+              }
+          });
+      } else {
+          // On desktop, use hover to pause/play
+          galleryContainer.addEventListener('mouseenter', pauseAutoPlay);
+          galleryContainer.addEventListener('mouseleave', () => {
+              isPaused = false;
+              startAutoPlay();
+          });
+      }
+      
+      window.addEventListener('resize', () => displayCategory(currentCategoryIndex));
+      
+      displayCategory(0);
+    }
+
+    function createFilterButtons() {
+      const taskIcons = { 'Line Intersection': 'fa fa-line-chart', 'Two Touching Circles': 'fas fa-circle', 'The Circled Letter': 'fa fa-registered', 'Overlapping Shapes': 'fas fa-circle', 'Nested Squares': 'fa fa-clone', 'Counting Grid Rows and Columns': 'fa fa-table', 'Subway Maps': 'fa fa-map-signs' };
+      filtersContainer.innerHTML = '';
+      categories.forEach((task, index) => {
+        const button = document.createElement('button');
+        button.className = 'gallery-filter-btn';
+        button.innerHTML = `<i class="${taskIcons[task] || 'fas fa-circle'}"></i> ${task}`;
+        button.dataset.index = index;
+        button.addEventListener('click', () => displayCategory(index));
+        filtersContainer.appendChild(button);
+      });
+    }
+
+    function createIndicators() {
+      indicatorsContainer.innerHTML = '';
+      categories.forEach((_, index) => {
+        const indicator = document.createElement('div');
+        indicator.className = 'gallery-indicator';
+        indicator.addEventListener('click', () => displayCategory(index));
+        indicatorsContainer.appendChild(indicator);
+      });
+    }
+
+    function displayCategory(index) {
+      clearInterval(autoSlideInterval); // Stop timer during transition
+      currentCategoryIndex = index;
+
+      viewport.style.opacity = '0';
+
+      // Increased delay for mobile devices to allow for loading
+      const transitionDelay = window.innerWidth <= 768 ? 600 : 300;
+
+      setTimeout(() => {
+          const categoryName = categories[index];
+          const activeData = galleryData.filter(item => item.task === categoryName);
+          const itemsPerView = getItemsPerView();
+          
+          viewport.innerHTML = '';
+          const track = document.createElement('div');
+          track.className = 'gallery-track';
+          const slide = document.createElement('div');
+          slide.className = 'gallery-slide';
+
+          let imagesLoaded = 0;
+          const totalImages = Math.min(itemsPerView, activeData.length);
+
+          // Function to handle when all images are loaded
+          function onAllImagesLoaded() {
+              viewport.style.opacity = '1';
+              updateActiveUI();
+              
+              // Longer interval on mobile to account for slower loading
+              const autoPlayDelay = window.innerWidth <= 768 ? 7000 : 5000;
+              setTimeout(() => {
+                  startAutoPlay();
+              }, 500); // Small delay before starting auto-play
+          }
+
+          // Function to check if image is loaded
+          function checkImageLoaded() {
+              imagesLoaded++;
+              if (imagesLoaded >= totalImages) {
+                  onAllImagesLoaded();
+              }
+          }
+
+          for (let i = 0; i < totalImages; i++) {
+              const item = activeData[i];
+              const galleryItem = document.createElement('div');
+              galleryItem.className = 'gallery-item';
+              
+              // Mobile: full width for vertical stacking
+              if (window.innerWidth <= 768) {
+                  galleryItem.style.width = '100%';
+                  galleryItem.style.margin = '0 0 0.5rem 0';
+              } else {
+                  // Desktop: horizontal layout
+                  const gapValue = '1.5rem';
+                  galleryItem.style.width = `calc((100% - (${itemsPerView - 1} * ${gapValue})) / ${itemsPerView})`;
+              }
+
+              galleryItem.innerHTML = `
+                <div class="example-card">
+                  <div class="example-image">
+                    <img src="${item.image}" alt="${item.task} example" loading="lazy">
+                    <div class="image-fallback"><i class="fas fa-exclamation-triangle"></i><span>Image not found</span></div>
+                  </div>
+                  <div class="example-content">
+                    <p class="example-question">${item.question}</p>
+                    <div class="example-info">
+                      <span><span class="info-label truth-label">Ground Truth:</span><span class="info-value truth-value">${item.groundTruth}</span></span>
+                      <span><span class="info-label bias-label">Bias:</span><span class="info-value bias-value">${item.expectedBias}</span></span>
+                    </div>
+                    <div class="example-footer">
+                      <span class="example-type"><i class="${item.icon}"></i> ${item.task}</span>
+                      <div class="copy-buttons">
+                        <button class="copy-prompt-btn" data-prompt="${item.question.replace(/"/g, '"')}"><i class="fas fa-copy"></i> Copy Prompt</button>
+                        <button class="copy-image-btn" data-image="${item.image}"><i class="fas fa-image"></i> Copy Image</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>`;
+              
+              const img = galleryItem.querySelector('img');
+              
+              // Enhanced image loading handling
+              img.addEventListener('load', checkImageLoaded);
+              img.addEventListener('error', () => {
+                  galleryItem.querySelector('.example-image').classList.add('has-error');
+                  checkImageLoaded(); // Still count as "loaded" to prevent hanging
+              });
+              
+              // Fallback: if image takes too long, proceed anyway
+              setTimeout(() => {
+                  if (imagesLoaded < i + 1) {
+                      checkImageLoaded();
+                  }
+              }, 3000); // 3 second timeout per image
+              
+              slide.appendChild(galleryItem);
+          }
+          
+          track.appendChild(slide);
+          viewport.appendChild(track);
+          
+          // Fallback: if no images or all failed to trigger load events
+          if (totalImages === 0) {
+              onAllImagesLoaded();
+          }
+          
+      }, transitionDelay);
+    }
+
+    function updateActiveUI() {
+      document.querySelectorAll('.gallery-filter-btn').forEach((btn, index) => {
+          btn.classList.toggle('active', index === currentCategoryIndex);
+      });
+      document.querySelectorAll('.gallery-indicator').forEach((dot, index) => {
+          dot.classList.toggle('active', index === currentCategoryIndex);
+      });
+    }
+
+    function changeCategory(direction) {
+      const newIndex = (currentCategoryIndex + direction + categories.length) % categories.length;
+      displayCategory(newIndex);
+    }
+
+    // Also update the startAutoPlay function:
+    function startAutoPlay() {
+        if (isPaused) return;
+        clearInterval(autoSlideInterval);
+        
+        // Longer intervals on mobile
+        const interval = window.innerWidth <= 768 ? 7000 : 5000;
+        autoSlideInterval = setInterval(() => changeCategory(1), interval);
+    }
+
+    function pauseAutoPlay() {
+      isPaused = true;
+      clearInterval(autoSlideInterval);
+    }
+    
+    function getItemsPerView() {
+      if (window.innerWidth <= 768) return 4; // Show 4 items stacked on mobile
+      if (window.innerWidth <= 1024) return 2;
+      return 4;
+    }
+
+    galleryContainer.addEventListener('click', async function(e) {
+      const promptButton = e.target.closest('.copy-prompt-btn');
+      if (promptButton) {
+        const promptText = promptButton.dataset.prompt;
+        navigator.clipboard.writeText(promptText).then(() => {
+          const originalText = promptButton.innerHTML;
+          promptButton.innerHTML = '<i class="fas fa-check"></i> Copied!';
+          promptButton.classList.add('copied');
+          setTimeout(() => {
+            promptButton.innerHTML = originalText;
+            promptButton.classList.remove('copied');
+          }, 2000);
+        });
+      }
+
+      const imageButton = e.target.closest('.copy-image-btn');
+      if (imageButton) {
+        const imageUrl = imageButton.dataset.image;
+      
+        // *** FIX #2: Conditional logic for "Copy Image" button ***
+        if (isTouchDevice) {
+          // On mobile, open image in a new tab for easy saving
+          window.open(imageUrl, '_blank');
+        } else {
+          // On desktop, use the Clipboard API
+          imageButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i>'; 
+          try {
+            const response = await fetch(imageUrl);
+            const blob = await response.blob();
+            await navigator.clipboard.write([ new ClipboardItem({ [blob.type]: blob }) ]);
+            
+            const originalText = '<i class="fas fa-image"></i> Copy Image';
+            imageButton.innerHTML = '<i class="fas fa-check"></i> Copied!';
+            imageButton.classList.add('copied');
+            setTimeout(() => {
+              imageButton.innerHTML = originalText;
+              imageButton.classList.remove('copied');
+            }, 2000);
+          } catch (err) {
+            console.error('Failed to copy image: ', err);
+            alert('Could not copy image. Your browser may not support this feature or there was a network error.');
+            imageButton.innerHTML = '<i class="fas fa-times"></i> Failed';
+          }
+        }
+      }
+    });
+
+    // Start everything
+    setup();
+  }
+
+
+  </script>
+
 </body>
-
-</html>
-
-</html>
-
-</html>
-
 </html>
